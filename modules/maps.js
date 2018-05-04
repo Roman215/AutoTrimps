@@ -1,7 +1,8 @@
 MODULES["maps"] = {};
 //These can be changed (in the console) if you know what you're doing:
-MODULES["maps"].enoughDamageCutoff = 4; //above this the game will do maps for map bonus stacks
-MODULES["maps"].farmingCutoff = 16;     //above this the game will farm.
+MODULES["maps"].enoughDamageCutoff = 4;                                         //above this the game will do maps for map bonus stacks
+MODULES["maps"].farmingCutoff = MODULES["maps"].enoughDamageCutoff * 4;         //above this the game will farm. (enoughDamageCutoff times D stance)
+MODULES["maps"].farmingCutoffScry = MODULES["maps"].enoughDamageCutoff / 2;     //above this the game will farm if we want to use Scryer stance in all cells
 MODULES["maps"].numHitsSurvived = 8;    //survive X hits in D stance or not enough Health.
 MODULES["maps"].LeadfarmingCutoff = 10; //lead has its own farmingCutoff
 MODULES["maps"].NomfarmingCutoff = 10;  //nom has its own farmingCutoff
@@ -162,7 +163,7 @@ function autoMap() {
     }
     // enter farming if it takes over 4 hits in D stance (16) (and exit if under.)
     if(!getPageSetting('DisableFarm')) {
-        shouldFarm = enemyHealth > (ourBaseDamage * customVars.farmingCutoff);
+        shouldFarm = enemyHealth > (ourBaseDamage * (wantToScry ? customVars.farmingCutoffScry : customVars.farmingCutoff));
         if(game.options.menu.repeatUntil.enabled == 1) toggleSetting('repeatUntil');    //turn repeat forever on if farming is on.
     }
 
