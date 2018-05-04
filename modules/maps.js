@@ -146,7 +146,7 @@ function autoMap() {
         enemyHealth *= 2;
     }
     //Corruption Zone Proportionality Farming Calculator:
-    var corrupt = game.global.world >= mutations.Corruption.start(true);
+    var corrupt = game.global.world >= mutations.Corruption.start(false);
     if (getPageSetting('CorruptionCalc') && corrupt) {
         var cptnum = getCorruptedCellsNum();     //count corrupted cells
         var cpthlth = getCorruptScale("health"); //get corrupted health mod
